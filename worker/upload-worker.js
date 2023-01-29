@@ -3,7 +3,7 @@ const logDir =  __dirname +  '/log';
 const log = require('electron-log');
 log.transports.console.level = 'info';
 log.transports.file.level = 'info';
-log.transports.file.file =logDir +  '/upload-log.log';
+log.transports.file.file =logDir + '/..' + '/upload-log.log';
 
 const path = require('path');
 const fetch = require('node-fetch');

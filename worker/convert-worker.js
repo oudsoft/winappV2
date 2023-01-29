@@ -2,13 +2,13 @@
 const log = require('electron-log');
 log.transports.console.level = 'info';
 log.transports.file.level = 'info';
-log.transports.file.file = __dirname +  '/log/convert-log.log';
+log.transports.file.file = __dirname + '/..' + '/log/convert-log.log';
 
 const exec = require('child_process').exec;
 const path = require('path');
 const fs = require('fs');
 
-const util = require('./lib/utility.js')( log);
+const util = require('../lib/utility.js')( log);
 
 const runcommand = function (command) {
 	return new Promise(function(resolve, reject) {

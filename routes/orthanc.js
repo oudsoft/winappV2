@@ -221,7 +221,15 @@ module.exports = (app, wsServer, wsClient, monitor) => {
       lastMountStr = req.body.studyFromDate;
     }
     log.info('lastMountStr=> ' + lastMountStr);
-    let command = 'curl --user demo:demo http://localhost:8042/tools/find -d "{\\"Level\\":\\"Study\\",\\"Query\\":{\\"StudyDate\\": \\"' + lastMountStr + '-\\"}, \\"Expand\\":true}"';
+
+    let dataCommand = '"{\\"Level\\":\\"Study\\",\\"Query\\":{\\"StudyDate\\": \\"' + lastMountStr + '-\\"}, \\"Expand\\":true}"';
+
+    let modFilter = req.body.modality;
+    log.info('modFilter=> ' + modFilter);
+    if ((modFilter) && (modFilter !== '*')) {
+      dataCommand = '"{\\"Level\\":\\"Study\\",\\"Query\\":{\\"StudyDate\\": \\"' + lastMountStr + '-\\", \\"Modality\\": \\"' + modFilter + '\\"}, \\"Expand\\":true}"';
+    }
+    let command = 'curl --user demo:demo http://localhost:8042/tools/find -d ' + dataCommand;
     log.info('command=> ' + command);
     util.runcommand(command).then((stdout)=>{
       //log.info('stdout=> ' + stdout);
@@ -406,6 +414,7 @@ module.exports = (app, wsServer, wsClient, monitor) => {
     let studyID = studyTags.ID;
     let userId = req.body.userId;
     let caseId = req.body.caseId;
+    let isChangeRadio = req.body.isChangeRadio;
 
     let convertResult = undefined;
     let newHrPatientFiles = [];

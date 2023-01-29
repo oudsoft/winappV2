@@ -2,7 +2,7 @@
 const log = require('electron-log');
 log.transports.console.level = 'info';
 log.transports.file.level = 'info';
-log.transports.file.file = __dirname +  '/log/newdicom-log.log';
+log.transports.file.file = __dirname + '/..' + '/log/newdicom-log.log';
 
 const exec = require('child_process').exec;
 const path = require('path');
@@ -10,7 +10,7 @@ const fs = require('fs');
 const url = require('url');
 const request = require('request-promise');
 
-const util = require('./lib/utility.js')( log);
+const util = require('../lib/utility.js')( log);
 
 const hospitalId = process.env.LOCAL_HOS_ID; /* 2 */
 const username = process.env.LOCAL_NAME; /*'orthanc'*/
